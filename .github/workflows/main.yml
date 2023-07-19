@@ -23,10 +23,5 @@ jobs:
           SECRET_NAME: ${{ secrets.SECRET_NAME }} # Replace with your AWS Secrets Manager secret name
           REGION_NAME: ${{ secrets.REGION_NAME }} # Replace with your AWS region name
         run: |
-          # Unzip the script and dependencies
-          unzip scripts/intune_wipe.zip -d .
-
-          # Install additional required packages if any (if your script uses additional packages)
-
-          # Execute the Python script
+          # Execute the Python script directly
           python intune_wipe.py
