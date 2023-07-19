@@ -1,24 +1,17 @@
 import requests
 import json
-import boto3
+import os
 
 # Intune API endpoint for device wipe
 intune_url = "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices"
 
-# AWS Secrets Manager details
-secret_name = "intune_credentials"
-region_name = "us-east-1"
+# Intune username and password fetched from GitHub Secrets
+intune_username = os.environ.get('INTUNE_USERNAME')
+intune_password = os.environ.get('INTUNE_PASSWORD')
 
 # Device ID and device name for the PC to be wiped
 device_id = "YOUR_DEVICE_ID"
 device_name = "YOUR_DEVICE_NAME"
-
-# Retrieve the Intune username and password from Secrets Manager
-secrets_client = boto3.client("secretsmanager", region_name=region_name)
-secret_response = secrets_client.get_secret_value(SecretId=secret_name)
-secret_data = json.loads(secret_response["SecretString"])
-intune_username = secret_data["username"]
-intune_password = secret_data["password"]
 
 # Construct the authentication token
 token_url = "https://login.microsoftonline.com/common/oauth2/token"
