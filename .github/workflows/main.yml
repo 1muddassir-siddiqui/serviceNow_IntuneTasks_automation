@@ -1,0 +1,32 @@
+name: Intune Wipe
+
+on:
+  push:
+    branches:
+      - main # Adjust the branch name as needed
+
+jobs:
+  intune_wipe_job:
+    runs-on: ubuntu-latest # You can choose other platforms like windows-latest or macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Replace 'x' with your desired Python version
+
+      - name: Run Intune Wipe
+        env:
+          SECRET_NAME: ${{ secrets.SECRET_NAME }} # Replace with your AWS Secrets Manager secret name
+          REGION_NAME: ${{ secrets.REGION_NAME }} # Replace with your AWS region name
+        run: |
+          # Unzip the script and dependencies
+          unzip scripts/intune_wipe.zip -d .
+
+          # Install additional required packages if any (if your script uses additional packages)
+
+          # Execute the Python script
+          python intune_wipe.py
