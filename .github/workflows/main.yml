@@ -18,10 +18,15 @@ jobs:
         with:
           python-version: '3.x' # Replace 'x' with your desired Python version
 
-      - name: Run Intune Wipe
+      - name: Set up secrets
         env:
-          SECRET_NAME: ${{ secrets.SECRET_NAME }} # Replace with your AWS Secrets Manager secret name
-          REGION_NAME: ${{ secrets.REGION_NAME }} # Replace with your AWS region name
+          INTUNE_USERNAME: ${{ secrets.INTUNE_USERNAME }} # Replace with the actual secret name
+          INTUNE_PASSWORD: ${{ secrets.INTUNE_PASSWORD }} # Replace with the actual secret name
+
+      - name: Run Intune Wipe
         run: |
-          # Execute the Python script directly
+          # Download the Python script
+          curl -o intune_wipe.py https://raw.githubusercontent.com/your-repo/intune_wipe.py
+
+          # Execute the Python script
           python intune_wipe.py
