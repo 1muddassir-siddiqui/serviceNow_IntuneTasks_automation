@@ -20,13 +20,11 @@ jobs:
 
       - name: Set up secrets
         env:
-          INTUNE_USERNAME: ${{ secrets.INTUNE_USERNAME }} # Replace with the actual secret name
-          INTUNE_PASSWORD: ${{ secrets.INTUNE_PASSWORD }} # Replace with the actual secret name
-
-      - name: Run Intune Wipe
+          INTUNE_USERNAME_SECRET: ${{ secrets.INTUNE_USERNAME }} # Replace with the actual secret name
+          INTUNE_PASSWORD_SECRET: ${{ secrets.INTUNE_PASSWORD }} # Replace with the actual secret name
         run: |
           # Download the Python script
           curl -o intune_wipe.py https://raw.githubusercontent.com/your-repo/intune_wipe.py
 
-          # Execute the Python script
-          python intune_wipe.py
+      - name: Run Intune Wipe
+        run: python intune_wipe.py
