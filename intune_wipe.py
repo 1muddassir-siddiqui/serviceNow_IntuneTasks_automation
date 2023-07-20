@@ -12,7 +12,7 @@ intune_password = os.environ.get('INTUNE_PASSWORD_SECRET')
 # Device ID for the PC to be wiped
 device_id = "ILDMC-BW4SQF3"
 
-# Construct the authentication token
+# Authenticate and get the access token for Intune
 token_url = "https://login.microsoftonline.com/common/oauth2/token"
 data = {
     'grant_type': 'password',
@@ -39,7 +39,6 @@ wipe_action_id = device_details['id']
 
 # Create the request body to initiate the device wipe
 wipe_request_body = {
-    '@odata.type': '#microsoft.graph.deviceWipeRequest',
     'keepUserData': False,
     'keepEnrollmentData': False,
     'deleteAlerts': False,
@@ -52,7 +51,7 @@ wipe_action_url = f"{intune_url}/{device_id}/wipe"
 response = requests.post(wipe_action_url, headers=headers, json=wipe_request_body)
 
 # Check the response status and display the result
-if response.status_code == 204:
+if response.status_code == 202:
     print("Device wipe initiated successfully.")
 else:
     print("Failed to initiate device wipe.")
