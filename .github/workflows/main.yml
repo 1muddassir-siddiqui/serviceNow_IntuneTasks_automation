@@ -13,18 +13,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x' # Replace 'x' with your desired Python version
+
+      - name: Install requests library
+        run: pip install requests
 
       - name: Set up secrets
         env:
           INTUNE_USERNAME_SECRET: ${{ secrets.INTUNE_USERNAME }} # Replace with the actual secret name
           INTUNE_PASSWORD_SECRET: ${{ secrets.INTUNE_PASSWORD }} # Replace with the actual secret name
+
+      - name: Run Intune Wipe
         run: |
           # Download the Python script
           curl -o intune_wipe.py https://raw.githubusercontent.com/your-repo/intune_wipe.py
 
-      - name: Run Intune Wipe
-        run: python intune_wipe.py
+          # Execute the Python script
+          python intune_wipe.py
