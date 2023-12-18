@@ -10,7 +10,7 @@ intune_username = os.environ.get('INTUNE_USERNAME_SECRET')
 intune_password = os.environ.get('INTUNE_PASSWORD_SECRET')
 
 # Device ID for the PC to be wiped
-device_id = "ILDMC-BW4SQF3"
+device_id = "9eb54adf-c7e0-467c-a1ae-8e093cb4c67c"
 
 # Authenticate and get the access token for Intune
 token_url = "https://login.microsoftonline.com/common/oauth2/token"
