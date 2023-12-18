@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x' # Replace 'x' with your desired Python version
+          python-version: '3.8' # Replace 'x' with your desired Python version
 
       - name: Install requests library
         run: pip install requests
